@@ -1,0 +1,15 @@
+<div>
+    <div *ngFor="let car of cars">
+        <mat-card class="car-card">
+            <mat-card-title-group>
+                <mat-card-title>{{car.marke}} {{car.modelis}}</mat-card-title>
+                <img mat-card-md-image src="https://media.istockphoto.com/vectors/modern-abstract-suv-red-car-parking-isolated-vector-id1166422340?b=1&k=20&m=1166422340&s=612x612&w=0&h=4Kp4GMydJS05ifZY9CNuuZW_C5acMkbCfsf_Ex4CK9Y=">
+            </mat-card-title-group>
+            <mat-card-content>
+                <p>Kaina: {{car.kaina}}</p>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+    
+</div>
