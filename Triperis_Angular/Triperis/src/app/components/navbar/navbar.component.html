@@ -1,3 +1,11 @@
 <mat-toolbar color="primary">
-    <span>Triperis.lt</span>
+    <h1 mat-button [routerLink]="'/'">Triperis.lt</h1>
+
+    <span class="fill-space"></span>
+
+    <ng-container>
+        <a mat-button [routerLink]="'/'">Skelbimai</a>
+    </ng-container>
 </mat-toolbar>
+
+<!--https://www.techiediaries.com/angular-material-navigation-toolbar-sidenav/-->

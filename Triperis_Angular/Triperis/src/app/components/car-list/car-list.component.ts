@@ -15,7 +15,6 @@ export class CarListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCars();
-    console.log('wat');
   }
 
   getAllCars(){
@@ -23,5 +22,4 @@ export class CarListComponent implements OnInit {
       this.cars = response;
     });
   }
-
 }
