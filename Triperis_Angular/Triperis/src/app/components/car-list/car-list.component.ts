@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./car-list.component.css']
 })
 export class CarListComponent implements OnInit {
-
+  loaded : boolean = false;
   cars: Car[] = [];
 
   constructor(private carService : CarsService) { }
@@ -20,6 +20,7 @@ export class CarListComponent implements OnInit {
   getAllCars(){
     this.carService.getAllCars().subscribe(response => {
       this.cars = response;
+      this.loaded = true;
     });
   }
 }

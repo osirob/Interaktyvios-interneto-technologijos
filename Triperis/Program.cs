@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Triperis.Data;
+using Triperis.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +12,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Connects to Database
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
-//Might be doing bad things
-//builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+//Adds Identity
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+//Settings for password. Made it more simple, only requires 6 characters
+builder.Services.Configure<IdentityOptions>(options => {
+    options.Password.RequireDigit = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+});
 
 builder.Services.AddCors((setup) =>
 {
@@ -36,7 +47,8 @@ app.UseCors("default");
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication();
+//app.UseAuthorization();
 
 app.MapControllers();
 

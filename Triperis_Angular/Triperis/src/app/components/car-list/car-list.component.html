@@ -1,4 +1,7 @@
-<div>
+<div class="offset" *ngIf="!loaded">
+    <mat-spinner class="margin"></mat-spinner>
+</div>
+<div *ngIf="loaded">
     <div *ngFor="let car of cars">
         <mat-card class="car-card">
             <mat-card-title-group>
@@ -9,7 +12,5 @@
                 <p>Kaina: {{car.kaina}}</p>
             </mat-card-content>
         </mat-card>
-
     </div>
-    
 </div>

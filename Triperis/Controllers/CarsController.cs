@@ -51,7 +51,7 @@ namespace Triperis.Controllers
             return CreatedAtAction(nameof(GetCar), new { id = car.Id }, car);
         }
 
-        //Update card
+        //Update car
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> UpdateCar([FromRoute] int id, [FromBody] Car car)

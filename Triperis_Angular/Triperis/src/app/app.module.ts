@@ -11,15 +11,21 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { CarListComponent } from './components/car-list/car-list.component';
-import { TestComponent } from './components/test/test.component';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoginComponent } from './components/userComponents/login/login.component';
+import { RegisterComponent } from './components/userComponents/register/register.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CarListComponent,
-    TestComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,14 @@ import { TestComponent } from './components/test/test.component';
     HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: CarListComponent, pathMatch: 'full'},
-    ])
+      {path: 'Register', component: RegisterComponent, pathMatch: 'full'},
+      {path: 'Test^^', redirectTo:'Register', pathMatch:'full'},
+    ]),
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
