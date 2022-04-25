@@ -55,4 +55,8 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
+
+  goBack() : void{
+    //Implement the redirect after there is somewhere to go
+  }
 }
