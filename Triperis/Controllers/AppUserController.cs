@@ -19,6 +19,7 @@ namespace Triperis.Controllers
         }
 
         // POST: api/AppUser/Register
+        //Might want to check if there are already users with same username or email, but eh... Maybe in the future
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(AppUserRegisterDto newUser)
