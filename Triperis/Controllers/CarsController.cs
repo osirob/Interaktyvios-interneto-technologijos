@@ -45,6 +45,7 @@ namespace Triperis.Controllers
         public async Task<IActionResult> AddCar([FromBody] Car car)
         {
             car.Data = DateTime.Now;
+            car.Parduotas = false;
             dbContext.Cars.Add(car);
             await dbContext.SaveChangesAsync();
 
