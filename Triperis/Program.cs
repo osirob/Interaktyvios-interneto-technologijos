@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Triperis.Data;
 using Triperis.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,20 +22,41 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>().AddEntityFrameworkStores<AppDbContext>();
 
 //Settings for password. Made it more simple, only requires 6 characters
-builder.Services.Configure<IdentityOptions>(options => {
+builder.Services.Configure<IdentityOptions>(options =>
+{
     options.Password.RequireDigit = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
 });
 
-builder.Services.AddCors((setup) =>
-{
-    setup.AddPolicy("default", (options) =>
+//JWT
+var key = Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings:JWT"].ToString()); 
+builder.Services.AddAuthentication(options => {
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x => {
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = false;
+    x.TokenValidationParameters = new TokenValidationParameters
     {
-        options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
-    });
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
 });
+
+//Old Cors
+//builder.Services.AddCors((setup) =>
+//{
+//    setup.AddPolicy("default", (options) =>
+//    {
+//        options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+//    });
+//});
 
 var app = builder.Build();
 
@@ -43,7 +67,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("default");
+//Old Cors
+//app.UseCors("default");
+app.UseCors(builder => 
+    builder.WithOrigins("http://localhost:4200/")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+);
 
 app.UseHttpsRedirection();
 

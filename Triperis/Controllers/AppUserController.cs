@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using Triperis.Models;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Triperis.Controllers
 {
@@ -19,7 +23,7 @@ namespace Triperis.Controllers
         }
 
         // POST: api/AppUser/Register
-        //Might want to check if there are already users with same username or email, but eh... Maybe in the future
+        // Might want to check if there are already users with same username or email, but eh... Maybe in the future
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(AppUserRegisterDto newUser)
@@ -33,6 +37,34 @@ namespace Triperis.Controllers
 
             var result = await _userManager.CreateAsync(user, newUser.Password);
             return Ok(result);
+        }
+
+        // POST: api/AppUser/Login
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login(LoginDto login)
+        {
+            var user  = await _userManager.FindByNameAsync(login.UserName);
+
+            if(user != null && await _userManager.CheckPasswordAsync(user, login.Password))
+            {
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[] {
+                        new Claim("UserId", user.Id.ToString())
+                    }),
+                    Expires = DateTime.UtcNow.AddMinutes(5),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1234567890123456")), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                return Ok(new { token });
+            }
+            else
+            {
+                return BadRequest(new { message = "Neteisingi prisijungimo duomenys" });
+            }
         }
     }
 }

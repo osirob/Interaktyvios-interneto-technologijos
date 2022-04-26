@@ -35,7 +35,7 @@
     </form>
 
     <div class="button-container">
-        <button mat-flat-button color="primary" (click)="addNewUser()">Registruotis</button>
+        <button mat-flat-button color="primary" (click)="addNewUser()" [disabled]="!form.valid" >Registruotis</button>
         <button mat-stroked-button (click)="goBack()" >Atšaukti</button>
     </div>
 </mat-card>

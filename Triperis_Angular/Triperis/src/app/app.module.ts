@@ -17,7 +17,7 @@ import { RegisterComponent } from './components/userComponents/register/register
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
@@ -38,6 +38,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     RouterModule.forRoot([
       {path: '', component: CarListComponent, pathMatch: 'full'},
       {path: 'Register', component: RegisterComponent, pathMatch: 'full'},
+      {path: 'Login', component: LoginComponent, pathMatch: 'full'},
       {path: 'Test^^', redirectTo:'Register', pathMatch:'full'},
     ]),
     MatProgressSpinnerModule,
@@ -45,7 +46,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatInputModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
