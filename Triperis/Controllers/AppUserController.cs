@@ -15,6 +15,7 @@ namespace Triperis.Controllers
     {
         private UserManager<AppUser> _userManager;
         private SignInManager<AppUser> _signInManager;
+        private string JwtCode = "1234567890123456";
 
         public AppUserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
@@ -53,8 +54,8 @@ namespace Triperis.Controllers
                     Subject = new ClaimsIdentity(new Claim[] {
                         new Claim("UserId", user.Id.ToString())
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(5),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1234567890123456")), SecurityAlgorithms.HmacSha256Signature)
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.JwtCode)), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
