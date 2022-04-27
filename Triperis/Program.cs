@@ -70,7 +70,7 @@ if (app.Environment.IsDevelopment())
 //Old Cors
 //app.UseCors("default");
 app.UseCors(builder => 
-    builder.WithOrigins("http://localhost:4200/")
+    builder.WithOrigins("http://localhost:4200")
     .AllowAnyHeader()
     .AllowAnyMethod()
 );

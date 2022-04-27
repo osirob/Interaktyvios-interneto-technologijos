@@ -19,6 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ProfileComponent } from './components/userComponents/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     NavbarComponent,
     CarListComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
       {path: 'Register', component: RegisterComponent, pathMatch: 'full'},
       {path: 'Login', component: LoginComponent, pathMatch: 'full'},
       {path: 'Test^^', redirectTo:'Register', pathMatch:'full'},
+      {path: 'Profile', component: ProfileComponent, pathMatch: 'full'},
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,
