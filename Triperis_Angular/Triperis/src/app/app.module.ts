@@ -1,4 +1,5 @@
-import { RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { RouterModule, CanActivate } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -44,10 +45,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: CarListComponent, pathMatch: 'full'},
-      {path: 'Register', component: RegisterComponent, pathMatch: 'full'},
-      {path: 'Login', component: LoginComponent, pathMatch: 'full'},
-      {path: 'Test^^', redirectTo:'Register', pathMatch:'full'},
-      {path: 'Profile', component: ProfileComponent, pathMatch: 'full'},
+      {path: 'Profile', component: ProfileComponent, pathMatch: 'full', canActivate:[AuthGuard]},
       {path: 'LoginRegister', component: UserTabsComponent, pathMatch: 'full'},
     ]),
     MatProgressSpinnerModule,

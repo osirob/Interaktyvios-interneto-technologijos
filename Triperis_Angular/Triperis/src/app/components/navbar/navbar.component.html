@@ -4,14 +4,14 @@
     <span class="fill-space"></span>
 
     <ng-container>
-        <a mat-button [routerLink]="'/'">Skelbimai</a>
+        <a mat-flat-button color="primary" [routerLink]="'/'">Skelbimai</a>
 
         <ng-container *ngIf="!loggedIn">
-            <a mat-button [routerLink]="'/LoginRegister'">Prisijungti</a>
+            <a mat-flat-button color="primary" [routerLink]="'/LoginRegister'">Prisijungti</a>
         </ng-container>
 
         <ng-container *ngIf="loggedIn">
-            <a mat-button [routerLink]="'/'" (click)="logout()">Atsijungti</a>
+            <a mat-flat-button color="primary" [routerLink]="'/'" (click)="logout()">Atsijungti</a>
         </ng-container>
 
         

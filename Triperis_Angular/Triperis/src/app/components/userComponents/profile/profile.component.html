@@ -1,1 +1,6 @@
-<p>profile works!</p>
+<p>This component is only for testing stuff</p>
+<ng-container *ngIf="userDetails">
+    <p>You are logged in!</p>
+    <p>Username: {{userDetails.userName}}</p>
+    <p>E-mail: {{userDetails.email}}</p>
+</ng-container>
