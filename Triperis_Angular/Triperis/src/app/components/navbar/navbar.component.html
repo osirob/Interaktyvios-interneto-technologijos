@@ -4,10 +4,22 @@
     <span class="fill-space"></span>
 
     <ng-container>
-        <a mat-button [routerLink]="'/'" target="_blank">Skelbimai i nauja langa</a>
         <a mat-button [routerLink]="'/'">Skelbimai</a>
-        <a mat-button [routerLink]="'/Register'">Registruotis</a>
+
+        <ng-container *ngIf="!loggedIn">
+            <a mat-button [routerLink]="'/LoginRegister'">Prisijungti</a>
+        </ng-container>
+
+        <ng-container *ngIf="loggedIn">
+            <a mat-button [routerLink]="'/'" (click)="logout()">Atsijungti</a>
+        </ng-container>
+
+        
     </ng-container>
 </mat-toolbar>
 
-<!--https://www.techiediaries.com/angular-material-navigation-toolbar-sidenav/-->
+<!--https://www.techiediaries.com/angular-material-navigation-toolbar-sidenav/
+
+<a mat-button [routerLink]="'/'" target="_blank">Skelbimai i nauja langa</a>
+
+-->

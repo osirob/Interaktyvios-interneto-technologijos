@@ -1,6 +1,6 @@
 import { LoginUser } from './../models/loginUser.model';
 import { RegisterUser } from './../models/registerUser.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -8,9 +8,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UsersService {
-  baseUrl = 'https://localhost:7289/api/AppUser'
+  private baseUrl = 'https://localhost:7289/api/AppUser'
+  private loggedInSource = new BehaviorSubject<boolean>(localStorage.getItem('token') === null ? false : true);
+  loggedInCurrent = this.loggedInSource.asObservable();
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient) { 
+    
+  }
 
   registerUser(newUser: RegisterUser) : Observable<RegisterUser> {
     return this.http.post<RegisterUser>(this.baseUrl + '/Register', newUser);
@@ -19,5 +23,13 @@ export class UsersService {
   //Returns error or JWT token
   login(user: LoginUser) : Observable<any>{
     return this.http.post<LoginUser>(this.baseUrl + '/Login', user);
+  }
+
+  setLogin(){
+    this.loggedInSource.next(true);
+  }
+
+  setLogout(){
+    this.loggedInSource.next(false);
   }
 }

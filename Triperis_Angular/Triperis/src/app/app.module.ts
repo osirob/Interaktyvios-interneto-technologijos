@@ -20,6 +20,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ProfileComponent } from './components/userComponents/profile/profile.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { UserTabsComponent } from './components/userComponents/user-tabs/user-tabs.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { ProfileComponent } from './components/userComponents/profile/profile.co
     CarListComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    FooterComponent,
+    UserTabsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +48,7 @@ import { ProfileComponent } from './components/userComponents/profile/profile.co
       {path: 'Login', component: LoginComponent, pathMatch: 'full'},
       {path: 'Test^^', redirectTo:'Register', pathMatch:'full'},
       {path: 'Profile', component: ProfileComponent, pathMatch: 'full'},
+      {path: 'LoginRegister', component: UserTabsComponent, pathMatch: 'full'},
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,
@@ -50,7 +56,8 @@ import { ProfileComponent } from './components/userComponents/profile/profile.co
     MatIconModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

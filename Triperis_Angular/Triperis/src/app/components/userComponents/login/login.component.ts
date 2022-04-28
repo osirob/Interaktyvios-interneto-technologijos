@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       //success case
       (response) => {
         localStorage.setItem('token', response.token);
+        this.usersService.setLogin();
         this.router.navigateByUrl('/Profile'); //navigates to car listings
       },
       
