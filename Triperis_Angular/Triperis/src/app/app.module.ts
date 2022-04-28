@@ -1,3 +1,5 @@
+import { AuthInterceptor } from './guards/auth.interceptor';
+import { UsersService } from 'src/app/services/users.service';
 import { AuthGuard } from './guards/auth.guard';
 import { RouterModule, CanActivate } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -6,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
@@ -57,7 +59,11 @@ import {MatTabsModule} from '@angular/material/tabs';
     FormsModule,
     MatTabsModule
   ],
-  providers: [],
+  providers: [UsersService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

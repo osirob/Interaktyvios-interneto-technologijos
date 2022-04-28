@@ -14,7 +14,7 @@ namespace Triperis.Controllers
         {
             this._userManager = userManager;
         }   
-
+        //Might want to move this to the other controller, idk why its here
         //GET api/AppUserAuth
         [HttpGet]
         [Authorize]

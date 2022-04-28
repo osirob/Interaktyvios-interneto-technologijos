@@ -27,6 +27,11 @@ export class UsersService {
     return this.http.post<LoginUser>(this.baseUrl + '/Login', user);
   }
 
+  logout() : void{
+    localStorage.removeItem('token');
+    this.setLogout();
+  }
+
   setLogin(){
     this.loggedInSource.next(true);
   }
@@ -36,8 +41,6 @@ export class UsersService {
   }
 
   getUserProfile() : Observable<UserDetails> {
-    //The space after the word Bearer IS A MUST
-    var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + localStorage.getItem('token')});
-    return this.http.get<UserDetails>(this.authenticatedUrl, {headers : tokenHeader});
+    return this.http.get<UserDetails>(this.authenticatedUrl);
   }
 }

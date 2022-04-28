@@ -16,12 +16,10 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() : void {
-    localStorage.removeItem('token');
-    this.usersService.setLogout();
+    this.usersService.logout();
   }
 
   checkLogin() : void {
     this.usersService.loggedInCurrent.subscribe(x => this.loggedIn = x);
   }
-
 }
