@@ -26,6 +26,8 @@ import { ProfileComponent } from './components/userComponents/profile/profile.co
 import { FooterComponent } from './components/footer/footer.component';
 import { UserTabsComponent } from './components/userComponents/user-tabs/user-tabs.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { UserListComponent } from './components/adminComponents/user-list/user-list.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     RegisterComponent,
     ProfileComponent,
     FooterComponent,
-    UserTabsComponent
+    UserTabsComponent,
+    UserListComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,8 @@ import {MatTabsModule} from '@angular/material/tabs';
       {path: '', component: CarListComponent, pathMatch: 'full'},
       {path: 'Profile', component: ProfileComponent, pathMatch: 'full', canActivate:[AuthGuard]},
       {path: 'LoginRegister', component: UserTabsComponent, pathMatch: 'full'},
+      {path: 'Forbidden', component: ForbiddenComponent, pathMatch: 'full'},
+      {path: 'UserList', component: UserListComponent, pathMatch: 'full', canActivate:[AuthGuard], data : {permittedRoles: ['Admin']}},
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,

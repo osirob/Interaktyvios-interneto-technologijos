@@ -43,4 +43,16 @@ export class UsersService {
   getUserProfile() : Observable<UserDetails> {
     return this.http.get<UserDetails>(this.authenticatedUrl);
   }
+
+  roleMatch(allowedRoles : Array<string>): boolean {
+    var isMatch = false;
+    var payload = JSON.parse(window.atob(localStorage.getItem('token')!.split('.')[1]));
+    var userRole = payload.role;
+    allowedRoles.forEach(element => {
+      if(userRole == element){
+        isMatch = true;
+      }
+    });
+    return isMatch;
+  }
 }

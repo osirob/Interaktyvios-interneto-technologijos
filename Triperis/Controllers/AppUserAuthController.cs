@@ -14,6 +14,7 @@ namespace Triperis.Controllers
         {
             this._userManager = userManager;
         }   
+
         //Might want to move this to the other controller, idk why its here
         //GET api/AppUserAuth
         [HttpGet]
@@ -26,6 +27,31 @@ namespace Triperis.Controllers
                 UserName = user.UserName,
                 Email = user.Email
             });
+        }
+
+        //TESTING METHODS
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("AdminTest")]
+        public string GetAdmin()
+        {
+            return "Esate Adminas";
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        [Route("UserTest")]
+        public string GetUser()
+        {
+            return "Esate Useris";
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User,Admin")]
+        [Route("Test")]
+        public string GetBoth()
+        {
+            return "Esate Useris arba Adminas";
         }
     }
 }

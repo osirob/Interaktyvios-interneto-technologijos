@@ -21,6 +21,9 @@ export class AuthInterceptor implements HttpInterceptor{
                             localStorage.removeItem('token');
                             this.router.navigateByUrl('/LoginRegister');
                         }
+                        else if(error.status == 403){
+                            this.router.navigateByUrl('/Forbidden');
+                        }
                     }
                 )
             )

@@ -29,6 +29,7 @@ namespace Triperis.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register(AppUserRegisterDto newUser)
         {
+            newUser.Role = "User";
             var user = new AppUser()
             {
                 UserName = newUser.UserName,
@@ -37,6 +38,7 @@ namespace Triperis.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, newUser.Password);
+            await _userManager.AddToRoleAsync(user, newUser.Role);
             return Ok(result);
         }
 
@@ -49,10 +51,14 @@ namespace Triperis.Controllers
 
             if(user != null && await _userManager.CheckPasswordAsync(user, login.Password))
             {
+                var roles = await _userManager.GetRolesAsync(user);
+                IdentityOptions _options = new IdentityOptions();
+
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[] {
-                        new Claim("UserId", user.Id.ToString())
+                        new Claim("UserId", user.Id.ToString()),
+                        new Claim(_options.ClaimsIdentity.RoleClaimType, roles.FirstOrDefault())
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.JwtCode)), SecurityAlgorithms.HmacSha256Signature)
