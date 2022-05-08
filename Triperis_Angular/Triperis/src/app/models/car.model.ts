@@ -13,6 +13,7 @@ export class Car {
     pavaruDeze: string;
     aprasymas: string;
     data: Date;
+    atnaujintasData: Date;
     parduotas: boolean;
     kaina: number;
     vin: string;

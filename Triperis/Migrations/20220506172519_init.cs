@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Triperis.Migrations
 {
-    public partial class userId : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,34 +49,6 @@ namespace Triperis.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cars",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Marke = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Modelis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Metai = table.Column<int>(type: "int", nullable: false),
-                    KuroTipas = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    KebuloTipas = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VariklioTuris = table.Column<double>(type: "float", nullable: false),
-                    Galia = table.Column<int>(type: "int", nullable: false),
-                    Rida = table.Column<int>(type: "int", nullable: false),
-                    Defektai = table.Column<bool>(type: "bit", nullable: false),
-                    Spalva = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PavaruDeze = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Aprasymas = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Parduotas = table.Column<bool>(type: "bit", nullable: false),
-                    Kaina = table.Column<int>(type: "int", nullable: false),
-                    Vin = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,6 +157,65 @@ namespace Triperis.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Cars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Marke = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Modelis = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Metai = table.Column<int>(type: "int", nullable: false),
+                    KuroTipas = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KebuloTipas = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VariklioTuris = table.Column<double>(type: "float", nullable: false),
+                    Galia = table.Column<int>(type: "int", nullable: false),
+                    Rida = table.Column<int>(type: "int", nullable: false),
+                    Defektai = table.Column<bool>(type: "bit", nullable: false),
+                    Spalva = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PavaruDeze = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Aprasymas = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SukurimoData = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AtnaujintasData = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Parduotas = table.Column<bool>(type: "bit", nullable: false),
+                    Kaina = table.Column<int>(type: "int", nullable: false),
+                    Vin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ispejimas = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cars_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreationDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -223,6 +254,16 @@ namespace Triperis.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_UserId",
+                table: "Cars",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_CarId",
+                table: "Comments",
+                column: "CarId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -243,10 +284,13 @@ namespace Triperis.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Cars");
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Cars");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

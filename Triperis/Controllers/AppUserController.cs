@@ -36,7 +36,6 @@ namespace Triperis.Controllers
                 Email = newUser.Email,
                 CanCreateListings = true
             };
-
             var result = await _userManager.CreateAsync(user, newUser.Password);
             await _userManager.AddToRoleAsync(user, newUser.Role);
             return Ok(result);

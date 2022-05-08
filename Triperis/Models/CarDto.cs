@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Triperis.Models
+﻿namespace Triperis.Models
 {
-    public class Car
+    public class CarDto
     {
-        [Key]
         public int Id { get; set; }
         public string Marke { get; set; }
         public string Modelis { get; set; }
@@ -24,15 +21,7 @@ namespace Triperis.Models
         public int Kaina { get; set; }
         public string Vin { get; set; }
         public bool Ispejimas { get; set; }
-
-        //Relationship with user
         public int UserId { get; set; }
-        public AppUser User { get; set; }
-
-        //Relationship with comments
-        public List<Comment> Comments { get; set; }
-
-        //Relationship with Images
-        public List<Image> Images { get; set; }
+        public string Pardavejas { get; set; }
     }
 }

@@ -5,6 +5,8 @@ using Triperis.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,14 @@ builder.Services.AddSwaggerGen();
 
 //Connects to Database
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+
+//For picture uploading
+builder.Services.Configure<FormOptions>(options => 
+{
+    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartBodyLengthLimit = int.MaxValue;
+    options.MemoryBufferThreshold = int.MaxValue;
+});
 
 //Adds Identity
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>().AddEntityFrameworkStores<AppDbContext>();
@@ -69,11 +79,20 @@ if (app.Environment.IsDevelopment())
 
 //Old Cors
 //app.UseCors("default");
+
+
 app.UseCors(builder => 
     builder.WithOrigins("http://localhost:4200")
     .AllowAnyHeader()
     .AllowAnyMethod()
 );
+
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Images")),
+    RequestPath = new PathString("/Images")
+});
 
 app.UseHttpsRedirection();
 

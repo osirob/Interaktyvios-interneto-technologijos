@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Triperis.Data;
 
@@ -11,9 +12,10 @@ using Triperis.Data;
 namespace Triperis.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220506182405_changedDateType")]
+    partial class changedDateType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -335,28 +337,6 @@ namespace Triperis.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Triperis.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -430,17 +410,6 @@ namespace Triperis.Migrations
                     b.Navigation("Car");
                 });
 
-            modelBuilder.Entity("Triperis.Models.Image", b =>
-                {
-                    b.HasOne("Triperis.Models.Car", "Car")
-                        .WithMany("Images")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-                });
-
             modelBuilder.Entity("Triperis.Models.AppUser", b =>
                 {
                     b.Navigation("Cars");
@@ -449,8 +418,6 @@ namespace Triperis.Migrations
             modelBuilder.Entity("Triperis.Models.Car", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

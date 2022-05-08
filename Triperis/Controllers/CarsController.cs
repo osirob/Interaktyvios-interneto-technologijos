@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Triperis.Data;
 using Triperis.Models;
@@ -7,13 +8,15 @@ namespace Triperis.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CarsController : Controller
+    public class CarsController : ControllerBase
     {
         private readonly AppDbContext dbContext;
+        private UserManager<AppUser> _userManager;
 
-        public CarsController(AppDbContext dbContext)
+        public CarsController(AppDbContext dbContext, UserManager<AppUser> userManager)
         {
             this.dbContext = dbContext;
+            this._userManager = userManager;
         }
         
         //GET all cars
@@ -22,7 +25,39 @@ namespace Triperis.Controllers
         public async Task<IActionResult> GetAllCars()
         {
             var cars = await dbContext.Cars.ToListAsync();
-            return Ok(cars);
+            var carDtos = new List<CarDto>();
+
+            foreach (var car in cars)
+            {
+                AppUser user = await _userManager.FindByIdAsync(car.UserId.ToString());
+
+                var carDto = new CarDto()
+                {
+                    Id = car.Id,
+                    Marke = car.Marke,
+                    Modelis = car.Modelis,
+                    Metai = car.Metai,
+                    KuroTipas = car.KuroTipas,
+                    KebuloTipas = car.KebuloTipas,
+                    VariklioTuris = car.VariklioTuris,
+                    Galia = car.Galia,
+                    Rida = car.Rida,
+                    Defektai = car.Defektai,
+                    Spalva = car.Spalva,
+                    PavaruDeze = car.PavaruDeze,
+                    Aprasymas = car.Aprasymas,
+                    SukurimoData = car.SukurimoData,
+                    AtnaujintasData = car.AtnaujintasData,
+                    Parduotas = car.Parduotas,
+                    Kaina = car.Kaina,
+                    Vin = car.Vin,
+                    Ispejimas = car.Ispejimas,
+                    UserId = car.UserId,
+                    Pardavejas = user.UserName
+                };
+                carDtos.Add(carDto);
+            }
+            return Ok(carDtos);
         }
 
         //Get one car by id
@@ -36,26 +71,73 @@ namespace Triperis.Controllers
             {
                 return NotFound("Car not found");
             }
-
-            return Ok(car);
+            else
+            {
+                AppUser user = await _userManager.FindByIdAsync(car.UserId.ToString());
+                var carDto = new CarDto()
+                {
+                    Id = car.Id,
+                    Marke = car.Marke,
+                    Modelis = car.Modelis,
+                    Metai = car.Metai,
+                    KuroTipas = car.KuroTipas,
+                    KebuloTipas = car.KebuloTipas,
+                    VariklioTuris = car.VariklioTuris,
+                    Galia = car.Galia,
+                    Rida = car.Rida,
+                    Defektai = car.Defektai,
+                    Spalva = car.Spalva,
+                    PavaruDeze = car.PavaruDeze,
+                    Aprasymas = car.Aprasymas,
+                    SukurimoData = car.SukurimoData,
+                    AtnaujintasData = car.AtnaujintasData,
+                    Parduotas = car.Parduotas,
+                    Kaina = car.Kaina,
+                    Vin = car.Vin,
+                    Ispejimas = car.Ispejimas,
+                    UserId = car.UserId,
+                    Pardavejas = user.UserName
+                };
+                return Ok(carDto);
+            }
         }
 
         //Add car to db
         [HttpPost]
-        public async Task<IActionResult> AddCar([FromBody] Car car)
+        public async Task<IActionResult> AddCar([FromBody] CarCreateDto car)
         {
-            car.Data = DateTime.Now;
-            car.Parduotas = false;
-            dbContext.Cars.Add(car);
+            var newCar = new Car() { 
+                Marke = car.Marke,
+                Modelis = car.Modelis,
+                Metai = car.Metai,
+                KebuloTipas = car.KebuloTipas,
+                KuroTipas = car.KuroTipas,
+                VariklioTuris = car.VariklioTuris,
+                Galia = car.Galia,
+                Rida = car.Rida,
+                Defektai = car.Defektai,
+                Spalva = car.Spalva,
+                PavaruDeze = car.PavaruDeze,
+                Aprasymas = car.Aprasymas,
+                Kaina = car.Kaina,
+                Vin = car.Vin,
+
+                SukurimoData = DateTime.Now,
+                AtnaujintasData = DateTime.Now,
+                Parduotas = false,
+                Ispejimas = false, //veliau pakeisti, prideti patikrinima
+                UserId = car.UserId,
+            };
+            dbContext.Cars.Add(newCar);
             await dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCar), new { id = car.Id }, car);
+            return CreatedAtAction(nameof(GetCar), new { id = newCar.Id }, newCar);
         }
 
         //Update car
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateCar([FromRoute] int id, [FromBody] Car car)
+        public async Task<IActionResult> UpdateCar([FromRoute] int id, [FromBody] CarCreateDto car)
         {
             var existingCar = await dbContext.Cars.FirstOrDefaultAsync(x => x.Id == id);
             if(existingCar != null)
@@ -75,6 +157,8 @@ namespace Triperis.Controllers
                 existingCar.Parduotas = car.Parduotas;
                 existingCar.Kaina = car.Kaina;
                 existingCar.Vin = car.Vin;
+
+                existingCar.AtnaujintasData = DateTime.Now;
                 await dbContext.SaveChangesAsync();
                 return Ok(existingCar);
             }
