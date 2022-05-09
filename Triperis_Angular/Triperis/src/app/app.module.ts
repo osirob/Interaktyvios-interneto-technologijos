@@ -28,6 +28,7 @@ import { UserTabsComponent } from './components/userComponents/user-tabs/user-ta
 import {MatTabsModule} from '@angular/material/tabs';
 import { UserListComponent } from './components/adminComponents/user-list/user-list.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { ImageUploadComponent } from './components/images/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
     FooterComponent,
     UserTabsComponent,
     UserListComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,7 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
       {path: 'LoginRegister', component: UserTabsComponent, pathMatch: 'full'},
       {path: 'Forbidden', component: ForbiddenComponent, pathMatch: 'full'},
       {path: 'UserList', component: UserListComponent, pathMatch: 'full', canActivate:[AuthGuard], data : {permittedRoles: ['Admin']}},
+      {path: 'UploadImages', component: ImageUploadComponent, pathMatch: 'full'}
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,

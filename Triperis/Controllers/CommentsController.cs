@@ -30,7 +30,7 @@ namespace Triperis.Controllers
             dbContext.Comments.Add(newComment);
             await dbContext.SaveChangesAsync();
 
-            return Ok(newComment);
+            return Ok(new { newComment });
         }
 
         [HttpDelete]

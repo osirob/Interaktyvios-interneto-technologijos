@@ -16,7 +16,7 @@ namespace Triperis.Controllers
         }
 
         [HttpPost, DisableRequestSizeLimit]
-        [Route("{id}")]
+        [Route("Upload/{id}")]
         public async Task<IActionResult> UploadImage([FromRoute] int id)
         {
             var file = Request.Form.Files[0]; //i guess i dont index this if i want o upload more than 1 image?
@@ -24,7 +24,7 @@ namespace Triperis.Controllers
             if(file.Length > 0)
             {
                 var savePath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
-                var fileName = (new Guid()).ToString();
+                var fileName =  Guid.NewGuid().ToString() + ".png";
 
                 var fullPath = Path.Combine(savePath, fileName);
                 var dbPath = Path.Combine("Images", fileName);
@@ -40,10 +40,10 @@ namespace Triperis.Controllers
                     CarId = id
                 };
 
-                dbContext.Images.Add(imageDb);
-                await dbContext.SaveChangesAsync();
+                //dbContext.Images.Add(imageDb);
+                //await dbContext.SaveChangesAsync();
 
-                return Ok(imageDb);
+                return Ok(new { dbPath });
             }
             else
             {
