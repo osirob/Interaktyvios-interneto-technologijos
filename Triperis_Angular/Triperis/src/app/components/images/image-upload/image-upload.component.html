@@ -1,5 +1,5 @@
 <h1>Upload Images</h1>
-<input class="form-control" type="file" (change)="onChange($event)">
+<input class="form-control" type="file" (change)="onChange($event)" accept="image/png, image/jpeg" multiple >
 <button (click)="onUpload()" 
         class="btn btn-success">
         Upload
