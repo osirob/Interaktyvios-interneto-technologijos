@@ -1,3 +1,4 @@
+import { ToastService } from './../../../services/toast.service';
 import { ImagesService } from './../../../services/images.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
@@ -13,15 +14,21 @@ export class ImageUploadComponent implements OnInit {
   files : File[] = [];
   @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private imagesService : ImagesService) { }
+  constructor(private imagesService : ImagesService, private toastService: ToastService) { }
 
   ngOnInit(): void {
   }
 
   onUpload() {
     if(this.files.length === 0){
+      this.toastService.open('Pasirinkite bent vieną nuotrauką.');
       return;
     }
+    else if(this.files.length > 4){
+      this.toastService.open('Pasirinkite iki 4 nuotraukų.');
+      return;
+    }
+    
     this.loading = !this.loading;
     let filesToUpload = <File[]>this.files;
   

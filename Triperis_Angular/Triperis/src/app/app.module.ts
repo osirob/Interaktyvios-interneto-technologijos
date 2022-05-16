@@ -29,6 +29,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { UserListComponent } from './components/adminComponents/user-list/user-list.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ImageUploadComponent } from './components/images/image-upload/image-upload.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ImageUploadComponent } from './components/images/image-upload/image-upl
     ReactiveFormsModule,
     MatSnackBarModule,
     FormsModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [UsersService,{
     provide: HTTP_INTERCEPTORS,

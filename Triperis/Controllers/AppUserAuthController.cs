@@ -25,7 +25,8 @@ namespace Triperis.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             return Ok( new {
                 UserName = user.UserName,
-                Email = user.Email
+                Email = user.Email,
+                Phone = user.PhoneNumber
             });
         }
 

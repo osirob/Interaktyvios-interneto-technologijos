@@ -19,9 +19,17 @@
 
         <p>
             <mat-form-field appearance="fill">
+                <mat-label>Įveskite telefono numerį</mat-label>
+                <input matInput formControlName="phone" prefix="+370" mask=" (000) 00 000" [dropSpecialCharacters]="false" />
+                <mat-error *ngIf="form.controls.phone.invalid">Neteisingas telefono numeris</mat-error>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance="fill">
                 <mat-label>Įveskite slaptažodį</mat-label>
                 <input matInput [type]="'password'" formControlName="password" />
-                <mat-error *ngIf="form.controls.password.invalid">Slaptažodis privalo būti bent bent šešių simbolių ilgio</mat-error>
+                <mat-error *ngIf="form.controls.password.invalid">Slaptažodį turi sudaryti bent šeši simboliai</mat-error>
             </mat-form-field>
         </p>
 

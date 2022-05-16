@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.minLength(6), Validators.required]],
       confirmPassword: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
     }, {validator: this.comparePasswords}) as FormGroup;
   }
 
@@ -48,6 +49,7 @@ export class RegisterComponent implements OnInit {
         email : this.form.controls.email.value,
         password : this.form.controls.password.value,
         role : '',
+        phone: this.form.controls.phone.value
       };
 
       this.usersService.registerUser(newUser).subscribe(() => {

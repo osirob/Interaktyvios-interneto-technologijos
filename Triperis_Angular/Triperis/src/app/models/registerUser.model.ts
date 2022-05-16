@@ -3,4 +3,5 @@ export class RegisterUser {
     email: string;
     password: string;
     role : string;
+    phone : string;
 }
