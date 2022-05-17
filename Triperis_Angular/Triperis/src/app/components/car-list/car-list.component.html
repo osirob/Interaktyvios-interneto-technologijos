@@ -7,15 +7,6 @@
     </div>
     <mat-divider></mat-divider>
     <div *ngFor="let car of cars">
-        <div class="car-listing">
-            <img class="picture" src="/assets\0559ddd6-bcd1-47b2-b6a8-5456da9c9e12.png">
-            <div class="car-details">
-                <h2>{{car.marke}} {{car.modelis}}</h2>
-                <p>{{car.variklioTuris}} l., {{car.kuroTipas}}, {{car.metai}} m, {{car.pavaruDeze}}, {{car.galia}} kW</p>
-                <p>{{car.rida}} km., {{car.kebuloTipas}}</p>
-                <h2>{{car.kaina}} €</h2>
-            </div>
-        </div>
-        <mat-divider></mat-divider>
+        <app-car-listing [carId]="car.id" ></app-car-listing>
     </div>
 </div>

@@ -31,6 +31,7 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ImageUploadComponent } from './components/images/image-upload/image-upload.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import {MatDividerModule} from '@angular/material/divider';
+import { CarListingComponent } from './components/car-listing/car-listing.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {MatDividerModule} from '@angular/material/divider';
     UserTabsComponent,
     UserListComponent,
     ForbiddenComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    CarListingComponent
   ],
   imports: [
     BrowserModule,

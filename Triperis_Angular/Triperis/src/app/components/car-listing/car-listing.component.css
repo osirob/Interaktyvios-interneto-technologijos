@@ -1,0 +1,18 @@
+.car-listing {
+    margin: 8px;
+    background: #F7F7F7;
+    padding: 15px;
+    
+  }
+
+.picture {
+    height: 180px;
+    width: 240px;
+    object-fit: cover;
+    float: left;
+  }
+
+.car-details {
+    margin-left: 260px;
+    margin-top: 15px;
+  }

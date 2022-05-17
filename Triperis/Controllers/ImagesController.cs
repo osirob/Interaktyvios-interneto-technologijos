@@ -24,10 +24,11 @@ namespace Triperis.Controllers
             if (files.Count > 0)
             {
                 var savePath = Path.Combine(Directory.GetCurrentDirectory(), "../Triperis_Angular/Triperis/src/assets");
-                
-                for(int i = 0; i < files.Count; i++)
+
+                for (int i = 0; i < files.Count; i++)
                 {
-                    var fileName = Guid.NewGuid().ToString() + ".png";
+                    //var fileName = Guid.NewGuid().ToString() + ".png";
+                    var fileName = "Car" + id.ToString() + "_" + (i + 1).ToString() + ".png";
 
                     var fullPath = Path.Combine(savePath, fileName);
                     var dbPath = Path.Combine("/assets", fileName);
@@ -53,6 +54,27 @@ namespace Triperis.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet]
+        [Route("GetFirstImage/{id}")]
+        public async Task<IActionResult> GetFirstImageURL([FromRoute] int id)
+        {
+            var carImages = dbContext.Images.Where(x => x.CarId == id).OrderBy(x => x.Path).ToList();
+            return Ok( new {path = carImages.First().Path});
+        }
+
+        [HttpDelete]
+        [Route("DeleteCarImages/{id}")]
+        public async Task<IActionResult> DeleteCarImages([FromRoute] int id)
+        {
+            var carImages = dbContext.Images.Where(x => x.CarId == id);
+            foreach(var image in carImages)
+            {
+                 dbContext.Images.Remove(image);
+            }
+            await dbContext.SaveChangesAsync();
+            return Ok();
         }
     }
 }

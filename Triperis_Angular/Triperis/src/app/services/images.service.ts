@@ -1,4 +1,5 @@
-import { Observable } from 'rxjs';
+import { ImageUrl } from './../models/imageUrl';
+import { Observable, retry } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -12,5 +13,9 @@ export class ImagesService {
 
   uploadImage(formdata : FormData, carId : number) : Observable<any> {
     return this.http.post(this.baseUrl + '/Upload' + `/${carId}`, formdata, {reportProgress: true, observe: 'events'});
+  }
+
+  getFirstImageUrl(id: number) : Observable<ImageUrl>{
+    return this.http.get<ImageUrl>(this.baseUrl + '/GetFirstImage' + `/${id}`);
   }
 }
