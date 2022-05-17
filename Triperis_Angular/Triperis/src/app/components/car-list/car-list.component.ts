@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Car } from './../../models/car.model';
 import { CarsService } from './../../services/cars.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,7 @@ export class CarListComponent implements OnInit {
   loaded : boolean = false;
   cars: Car[] = [];
 
-  constructor(private carService : CarsService) { }
+  constructor(private carService : CarsService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllCars();
@@ -22,5 +23,9 @@ export class CarListComponent implements OnInit {
       this.cars = response;
       this.loaded = true;
     });
+  }
+
+  navigate(car : Car) : void{
+    this.router.navigate(['Cars', `${car.id}`]);
   }
 }

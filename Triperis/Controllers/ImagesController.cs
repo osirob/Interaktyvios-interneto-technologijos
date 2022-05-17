@@ -61,7 +61,21 @@ namespace Triperis.Controllers
         public async Task<IActionResult> GetFirstImageURL([FromRoute] int id)
         {
             var carImages = dbContext.Images.Where(x => x.CarId == id).OrderBy(x => x.Path).ToList();
-            return Ok( new {path = carImages.First().Path});
+            return Ok( new ImageDto {Path = carImages.First().Path});
+        }
+
+        [HttpGet]
+        [Route("GetCarImages/{id}")]
+        public async Task<IActionResult> GetCarImages([FromRoute] int id)
+        {
+            var carImages = dbContext.Images.Where(x => x.CarId == id).OrderBy(x => x.Path).ToList();
+            var imageList = new List<ImageDto>();
+            foreach( var image in carImages)
+            {
+                var x = new ImageDto { Path = image.Path };
+                imageList.Add(x);
+            }
+            return Ok(imageList);
         }
 
         [HttpDelete]

@@ -7,6 +7,6 @@
     </div>
     <mat-divider></mat-divider>
     <div *ngFor="let car of cars">
-        <app-car-listing [carId]="car.id" ></app-car-listing>
+        <app-car-listing [carId]="car.id" (click)="navigate(car)" ></app-car-listing>
     </div>
 </div>

@@ -44,6 +44,10 @@ export class UsersService {
     return this.http.get<UserDetails>(this.authenticatedUrl);
   }
 
+  getUserById(id : number) : Observable<UserDetails>{
+    return this.http.get<UserDetails>(this.authenticatedUrl + '/GetUserById' + `/${id}`);
+  }
+
   roleMatch(allowedRoles : Array<string>): boolean {
     var isMatch = false;
     var payload = JSON.parse(window.atob(localStorage.getItem('token')!.split('.')[1]));

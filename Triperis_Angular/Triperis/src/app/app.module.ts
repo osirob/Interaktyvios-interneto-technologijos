@@ -32,6 +32,7 @@ import { ImageUploadComponent } from './components/images/image-upload/image-upl
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import {MatDividerModule} from '@angular/material/divider';
 import { CarListingComponent } from './components/car-listing/car-listing.component';
+import { CarDetailedViewComponent } from './components/car-detailed-view/car-detailed-view.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CarListingComponent } from './components/car-listing/car-listing.compon
     UserListComponent,
     ForbiddenComponent,
     ImageUploadComponent,
-    CarListingComponent
+    CarListingComponent,
+    CarDetailedViewComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { CarListingComponent } from './components/car-listing/car-listing.compon
       {path: 'LoginRegister', component: UserTabsComponent, pathMatch: 'full'},
       {path: 'Forbidden', component: ForbiddenComponent, pathMatch: 'full'},
       {path: 'UserList', component: UserListComponent, pathMatch: 'full', canActivate:[AuthGuard], data : {permittedRoles: ['Admin']}},
-      {path: 'UploadImages', component: ImageUploadComponent, pathMatch: 'full'}
+      {path: 'UploadImages', component: ImageUploadComponent, pathMatch: 'full'},
+      {path: 'Cars/:id', component: CarDetailedViewComponent}
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,

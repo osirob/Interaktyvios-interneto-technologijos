@@ -7,7 +7,7 @@ import { Car } from '../models/car.model';
   providedIn: 'root'
 })
 export class CarsService {
-  baseUrl = 'https://localhost:7289/api/Cars'
+  baseUrl = 'https://localhost:7289/api/Cars';
 
   constructor(private http: HttpClient) { }
 

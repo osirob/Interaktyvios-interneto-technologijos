@@ -18,4 +18,8 @@ export class ImagesService {
   getFirstImageUrl(id: number) : Observable<ImageUrl>{
     return this.http.get<ImageUrl>(this.baseUrl + '/GetFirstImage' + `/${id}`);
   }
+  
+  getCarImages(id: number) : Observable<ImageUrl[]>{
+    return this.http.get<ImageUrl[]>(this.baseUrl + '/GetCarImages' + `/${id}`);
+  } 
 }
