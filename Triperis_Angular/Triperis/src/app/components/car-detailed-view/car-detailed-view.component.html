@@ -1,1 +1,109 @@
-<p>car-detailed-view works!</p>
+<div class="offset">
+    <h1>{{car.marke}} {{car.modelis}} {{car.kebuloTipas}} {{car.metai}} m</h1>
+    <p class="gray">Atnaujinta {{dateUpdated}}</p>
+</div>
+
+<div class="info">
+    <div class="seller">
+        <div class="sellerName">
+            <p>Pardavėjas | {{seller.userName}}</p>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="phone">
+            <p>{{seller.phone}}</p>
+        </div>
+        <div class="email">
+            <p>{{seller.email}}</p>
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="car">
+        <div class="attrName">
+            <p>Markė</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.marke}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>Modelis</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.modelis}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>Metai</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.metai}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>Variklis</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.variklioTuris}} l. {{car.galia}} kW</p>
+        </div>
+
+        <div class="attrName">
+            <p>Kuro tipas</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.kuroTipas}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>Kėbulo tipas</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.kebuloTipas}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>Spalva</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.spalva}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>Pavarų dėžė</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.pavaruDeze}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>Rida, km</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.rida}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>Defektai</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.defektai}}</p>
+        </div>
+
+        <div class="attrName">
+            <p>VIN</p>
+        </div>
+        <div class="attrValue">
+            <p>{{car.vin}}1111111111</p>
+        </div>
+
+        <div class="attrName">
+            <p>Kaina</p>
+        </div>
+        <div class="price">
+            <p>{{car.kaina}} €</p>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="description">
+        
+    </div>
+</div>

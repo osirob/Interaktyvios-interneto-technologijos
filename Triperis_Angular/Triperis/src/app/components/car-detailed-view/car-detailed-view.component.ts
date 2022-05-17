@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car.model';
 import { ImagesService } from 'src/app/services/images.service';
 import { ImageUrl } from 'src/app/models/imageUrl';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-car-detailed-view',
@@ -18,6 +19,8 @@ export class CarDetailedViewComponent implements OnInit {
   images : ImageUrl[];
   seller : UserDetails;
   comments : Comment[];
+  dateCreated : string;
+  dateUpdated : string;
   
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +38,9 @@ export class CarDetailedViewComponent implements OnInit {
     var id = String(this.route.snapshot.paramMap.get('id'));
     this.carsService.getCar(Number(id)).subscribe(event => {
       this.car = event;
+      this.dateUpdated = formatDate(this.car.atnaujintasData, 'yyy-MM-dd HH:mm', 'en-US');
+      this.dateCreated = formatDate(this.car.sukurimoData, 'yyy-MM-dd HH:mm', 'en-US');
+
       this.getImages();
       this.getSeller();
       this.getComments();
