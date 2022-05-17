@@ -52,8 +52,7 @@ namespace Triperis.Controllers
                     Kaina = car.Kaina,
                     Vin = car.Vin,
                     Ispejimas = car.Ispejimas,
-                    UserId = car.UserId,
-                    Pardavejas = user.UserName
+                    UserId = car.UserId
                 };
                 carDtos.Add(carDto);
             }
@@ -95,8 +94,7 @@ namespace Triperis.Controllers
                     Kaina = car.Kaina,
                     Vin = car.Vin,
                     Ispejimas = car.Ispejimas,
-                    UserId = car.UserId,
-                    Pardavejas = user.UserName
+                    UserId = car.UserId
                 };
                 return Ok(carDto);
             }

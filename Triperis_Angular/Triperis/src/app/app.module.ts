@@ -29,7 +29,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { UserListComponent } from './components/adminComponents/user-list/user-list.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ImageUploadComponent } from './components/images/image-upload/image-upload.component';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
     MatSnackBarModule,
     FormsModule,
     MatTabsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MatDividerModule
   ],
   providers: [UsersService,{
     provide: HTTP_INTERCEPTORS,

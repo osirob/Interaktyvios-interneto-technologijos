@@ -23,14 +23,14 @@ namespace Triperis.Controllers
 
             if (files.Count > 0)
             {
-                var savePath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+                var savePath = Path.Combine(Directory.GetCurrentDirectory(), "../Triperis_Angular/Triperis/src/assets");
                 
                 for(int i = 0; i < files.Count; i++)
                 {
                     var fileName = Guid.NewGuid().ToString() + ".png";
 
                     var fullPath = Path.Combine(savePath, fileName);
-                    var dbPath = Path.Combine("Images", fileName);
+                    var dbPath = Path.Combine("/assets", fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {

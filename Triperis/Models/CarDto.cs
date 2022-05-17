@@ -22,6 +22,5 @@
         public string Vin { get; set; }
         public bool Ispejimas { get; set; }
         public int UserId { get; set; }
-        public string Pardavejas { get; set; }
     }
 }
