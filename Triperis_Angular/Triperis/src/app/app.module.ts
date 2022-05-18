@@ -29,10 +29,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { UserListComponent } from './components/adminComponents/user-list/user-list.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ImageUploadComponent } from './components/images/image-upload/image-upload.component';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import {MatDividerModule} from '@angular/material/divider';
 import { CarListingComponent } from './components/car-listing/car-listing.component';
 import { CarDetailedViewComponent } from './components/car-detailed-view/car-detailed-view.component';
+import { SwiperModule } from "swiper/angular";
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { CarDetailedViewComponent } from './components/car-detailed-view/car-det
     FormsModule,
     MatTabsModule,
     NgxMaskModule.forRoot(),
-    MatDividerModule
+    MatDividerModule,
+    SwiperModule
   ],
   providers: [UsersService,{
     provide: HTTP_INTERCEPTORS,

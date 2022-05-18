@@ -58,10 +58,6 @@
     float: left;
 }
 
-.attrValue{
-    
-}
-
 .price {
     font-weight: bold;
     font-size: x-large;
@@ -69,5 +65,14 @@
 }
 
 .description{
-    
+    margin-top: 15px;
+}
+
+.textBox {
+    width: 100%;
+}
+
+.pictures{
+    width: 65%;
+    float: right;
 }
