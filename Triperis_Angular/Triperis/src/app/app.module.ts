@@ -35,6 +35,7 @@ import { CarListingComponent } from './components/car-listing/car-listing.compon
 import { CarDetailedViewComponent } from './components/car-detailed-view/car-detailed-view.component';
 import { ImageCarouselComponent } from './components/images/image-carousel/image-carousel.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { CarCommentComponent } from './components/car-comment/car-comment.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     ImageUploadComponent,
     CarListingComponent,
     CarDetailedViewComponent,
-    ImageCarouselComponent
+    ImageCarouselComponent,
+    CarCommentComponent
   ],
   imports: [
     BrowserModule,

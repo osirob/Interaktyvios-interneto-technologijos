@@ -1,4 +1,4 @@
-export class Comment {
+export class CarComment {
     id: number;
     text : string;
     creationDate : Date;

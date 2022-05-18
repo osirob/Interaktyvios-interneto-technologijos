@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CarComment } from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class CommentsService {
 
   constructor(private http: HttpClient) { }
 
-  getCommentsById(carId : number) : Observable<Comment[]>{
-    return this.http.get<Comment[]>(this.baseUrl + `/${carId}`);
+  getCommentsById(carId : number) : Observable<CarComment[]>{
+    return this.http.get<CarComment[]>(this.baseUrl + `/${carId}`);
   }
 }

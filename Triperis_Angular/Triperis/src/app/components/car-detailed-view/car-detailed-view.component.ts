@@ -8,6 +8,7 @@ import { Car } from 'src/app/models/car.model';
 import { ImagesService } from 'src/app/services/images.service';
 import { ImageUrl } from 'src/app/models/imageUrl';
 import { formatDate } from '@angular/common';
+import { CarComment } from 'src/app/models/comment.model';
 
 @Component({
   selector: 'app-car-detailed-view',
@@ -18,9 +19,10 @@ export class CarDetailedViewComponent implements OnInit {
   car: Car = new Car();
   images : ImageUrl[];
   seller : UserDetails;
-  comments : Comment[];
+  comments : CarComment[];
   dateCreated : string;
   dateUpdated : string;
+  ready :number = 0;
   
   constructor(
     private route: ActivatedRoute,
@@ -51,18 +53,21 @@ export class CarDetailedViewComponent implements OnInit {
   getImages(): void {
     this.imageService.getCarImages(this.car.id).subscribe(event => {
       this.images = event;
+      this.ready++;
     });
   }
 
   getSeller(): void {
     this.userService.getUserById(this.car.userId).subscribe(event => {
       this.seller = event;
+      this.ready++;
     });
   }
 
   getComments(): void{
     this.commentService.getCommentsById(this.car.id).subscribe(event => {
       this.comments = event;
+      this.ready++
     });
   }
 
