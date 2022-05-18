@@ -44,7 +44,7 @@ export class ImageUploadComponent implements OnInit {
     console.log(formData.getAll('files'));
 
     //formData.append('file', filesToUpload);
-    this.imagesService.uploadImage(formData, 3).subscribe( response =>{
+    this.imagesService.uploadImage(formData, 1).subscribe( response =>{
       if(response.type === HttpEventType.Response){
         console.log('Images Uploaded');
       }

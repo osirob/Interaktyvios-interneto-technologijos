@@ -33,7 +33,9 @@ import { NgxMaskModule } from 'ngx-mask';
 import {MatDividerModule} from '@angular/material/divider';
 import { CarListingComponent } from './components/car-listing/car-listing.component';
 import { CarDetailedViewComponent } from './components/car-detailed-view/car-detailed-view.component';
-import { SwiperModule } from "swiper/angular";
+import { ImageCarouselComponent } from './components/images/image-carousel/image-carousel.component';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { SwiperModule } from "swiper/angular";
     ForbiddenComponent,
     ImageUploadComponent,
     CarListingComponent,
-    CarDetailedViewComponent
+    CarDetailedViewComponent,
+    ImageCarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,7 @@ import { SwiperModule } from "swiper/angular";
     MatTabsModule,
     NgxMaskModule.forRoot(),
     MatDividerModule,
-    SwiperModule
+    IvyCarouselModule
   ],
   providers: [UsersService,{
     provide: HTTP_INTERCEPTORS,

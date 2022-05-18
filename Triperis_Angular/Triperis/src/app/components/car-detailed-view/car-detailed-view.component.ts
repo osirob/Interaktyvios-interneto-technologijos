@@ -8,8 +8,6 @@ import { Car } from 'src/app/models/car.model';
 import { ImagesService } from 'src/app/services/images.service';
 import { ImageUrl } from 'src/app/models/imageUrl';
 import { formatDate } from '@angular/common';
-import SwiperCore, { EffectFade, Navigation, Pagination } from "swiper";
-SwiperCore.use([EffectFade, Navigation, Pagination]);
 
 @Component({
   selector: 'app-car-detailed-view',
@@ -42,7 +40,7 @@ export class CarDetailedViewComponent implements OnInit {
       this.car = event;
       this.dateUpdated = formatDate(this.car.atnaujintasData, 'yyy-MM-dd HH:mm', 'en-US');
       this.dateCreated = formatDate(this.car.sukurimoData, 'yyy-MM-dd HH:mm', 'en-US');
-      this.car.aprasymas = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+      //this.car.aprasymas = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
 
       this.getImages();
       this.getSeller();
