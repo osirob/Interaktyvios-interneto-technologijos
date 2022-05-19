@@ -69,7 +69,6 @@ namespace Triperis.Controllers
                 }
                 return Ok(commentDtos);
             }
-            
             return NotFound("No Comments");
         }
     }

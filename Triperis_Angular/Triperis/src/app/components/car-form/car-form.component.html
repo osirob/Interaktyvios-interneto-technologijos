@@ -1,0 +1,22 @@
+<h1>{{title}}</h1>
+<form [formGroup]="form">
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Markė</mat-label>
+            <mat-select formControlName="marke" required (ngModelChange)="onChange($event)">
+                <mat-option *ngFor="let br of carsInfo" [value]="br.brand">
+                    {{br.brand}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Modelis</mat-label>
+        <mat-select formControlName="modelis" required>
+            <mat-option *ngFor="let md of models" [value]="md">
+                {{md}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>

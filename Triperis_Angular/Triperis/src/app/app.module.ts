@@ -36,6 +36,8 @@ import { CarDetailedViewComponent } from './components/car-detailed-view/car-det
 import { ImageCarouselComponent } from './components/images/image-carousel/image-carousel.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { CarCommentComponent } from './components/car-comment/car-comment.component';
+import { CarFormComponent } from './components/car-form/car-form.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import { CarCommentComponent } from './components/car-comment/car-comment.compon
     CarListingComponent,
     CarDetailedViewComponent,
     ImageCarouselComponent,
-    CarCommentComponent
+    CarCommentComponent,
+    CarFormComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { CarCommentComponent } from './components/car-comment/car-comment.compon
       {path: 'Forbidden', component: ForbiddenComponent, pathMatch: 'full'},
       {path: 'UserList', component: UserListComponent, pathMatch: 'full', canActivate:[AuthGuard], data : {permittedRoles: ['Admin']}},
       {path: 'UploadImages', component: ImageUploadComponent, pathMatch: 'full'},
-      {path: 'Cars/:id', component: CarDetailedViewComponent}
+      {path: 'Cars/:id', component: CarDetailedViewComponent},
+      {path: 'Form', component: CarFormComponent}
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,
@@ -82,7 +86,8 @@ import { CarCommentComponent } from './components/car-comment/car-comment.compon
     MatTabsModule,
     NgxMaskModule.forRoot(),
     MatDividerModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    MatSelectModule
   ],
   providers: [UsersService,{
     provide: HTTP_INTERCEPTORS,
