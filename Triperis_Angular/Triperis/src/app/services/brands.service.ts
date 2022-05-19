@@ -25,9 +25,42 @@ export class BrandsService {
     {brand: 'Toyota', models: ['Camry', 'Corolla', 'Yaris', 'Land Cruiser', 'Rav4', 'Hilux', 'Supra', 'GR86']}
   ];
 
+  private years : number[] = [];
+  private colors : string[] = ['Balta', 'Juoda', 'Ruda', 'Pilka', 'Geltona', 'Oranžinė', 'Raudona', 'Violetinė', 'Rausva', 'Mėlyna', 'Žalia', 'Žydra'];
+  private bodies : string[] = ['Sedanas', 'Hečbekas', 'Universalas', 'Visureigis', 'Kabrioletas', 'Limuzinas', 'Pikapas', 'Kupė'];
+  private fuel : string[] = ['Dyzelinas', 'Benzinas', 'Benzinas / Dujos', 'Benzinas / Elektra', 'Elektra'];
+  private gearbox : string[] = ['Automatinė', 'Mechaninė'];
+
   constructor() { }
 
   getInfo(){
     return this.cars;
+  }
+
+  private setYears(): void {
+    for (var i = 1970; i < 2023; i++){
+      this.years.push(i);
+    }
+  }
+
+  getYears(){
+    this.setYears();
+    return this.years;
+  }
+
+  getColors(){
+    return this.colors.sort();
+  }
+
+  getBodies(){
+    return this.bodies.sort();
+  }
+
+  getFuelTypes(){
+    return this.fuel;
+  }
+
+  getGearboxTypes(){
+    return this.gearbox;
   }
 }

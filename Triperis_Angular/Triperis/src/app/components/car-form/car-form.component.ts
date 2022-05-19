@@ -2,6 +2,7 @@ import { BrandsService } from './../../services/brands.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { Car } from 'src/app/models/car.model';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-car-form',
@@ -12,8 +13,14 @@ export class CarFormComponent implements OnInit {
 
   @Input() title: string;
   public form: FormGroup;
+
   public carsInfo : any;
   public models : any;
+  public years : number[];
+  public colors : string[];
+  public bodies : string[];
+  public fuelType: string[];
+  public gearboxType: string[];
 
   constructor(
     private fb: FormBuilder,
@@ -27,12 +34,28 @@ export class CarFormComponent implements OnInit {
 
   getCarsInfo(): void{
     this.carsInfo = this.brandsService.getInfo();
+    this.years = this.brandsService.getYears();
+    this.colors = this.brandsService.getColors();
+    this.bodies = this.brandsService.getBodies();
+    this.fuelType = this.brandsService.getFuelTypes();
+    this.gearboxType = this.brandsService.getGearboxTypes();
   }
 
   initializeForm() : void{
     this.form = this.fb.group({
       marke: ['', [Validators.required]],
-      modelis: new FormControl({value: '', disabled: true})
+      modelis: new FormControl({value: '', disabled: true}),
+      metai: ['', [Validators.required]],
+      spalva: ['', [Validators.required]],
+      kebuloTipas: ['', [Validators.required]],
+      variklioTuris: ['', [Validators.required]],
+      kuroTipas: ['', [Validators.required]],
+      galia: ['', [Validators.required]],
+      pavaruDeze: ['', [Validators.required]],
+      rida: ['', [Validators.required]],
+      vin: ['', [Validators.required]],
+      defektai: ['', [Validators.required]],
+      kaina: ['', [Validators.required]]
     }) as FormGroup;
   }
 
@@ -49,5 +72,9 @@ export class CarFormComponent implements OnInit {
         return i.models;
       }
     }
+  }
+
+  log(){
+    console.log(this.form.controls.defektai.value);
   }
 }

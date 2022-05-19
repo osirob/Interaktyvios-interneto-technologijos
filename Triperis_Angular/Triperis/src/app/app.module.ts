@@ -38,6 +38,7 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { CarCommentComponent } from './components/car-comment/car-comment.component';
 import { CarFormComponent } from './components/car-form/car-form.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import {MatSelectModule} from '@angular/material/select';
     NgxMaskModule.forRoot(),
     MatDividerModule,
     IvyCarouselModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonToggleModule
   ],
   providers: [UsersService,{
     provide: HTTP_INTERCEPTORS,
