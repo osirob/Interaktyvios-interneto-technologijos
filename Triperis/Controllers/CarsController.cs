@@ -18,7 +18,7 @@ namespace Triperis.Controllers
             this.dbContext = dbContext;
             this._userManager = userManager;
         }
-        
+
         //GET all cars
         // api/Cars
         [HttpGet]
@@ -66,7 +66,7 @@ namespace Triperis.Controllers
         public async Task<IActionResult> GetCar([FromRoute] int id)
         {
             var car = await dbContext.Cars.FirstOrDefaultAsync(x => x.Id == id);
-            if(car == null)
+            if (car == null)
             {
                 return NotFound("Car not found");
             }
@@ -104,7 +104,17 @@ namespace Triperis.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCar([FromBody] CarCreateDto car)
         {
-            var newCar = new Car() { 
+            bool warning = false;
+            var dupicate = await dbContext.Cars.Where(c => c.Vin == car.Vin).FirstOrDefaultAsync();
+            if (dupicate != null)
+            {
+                if((DateTime.Now - dupicate.AtnaujintasData).TotalDays < 14)
+                {
+                    warning = true;
+                }
+            }
+
+            var newCar = new Car() {
                 Marke = car.Marke,
                 Modelis = car.Modelis,
                 Metai = car.Metai,
@@ -123,7 +133,7 @@ namespace Triperis.Controllers
                 SukurimoData = DateTime.Now,
                 AtnaujintasData = DateTime.Now,
                 Parduotas = false,
-                Ispejimas = false, //veliau pakeisti, prideti patikrinima
+                Ispejimas = warning,
                 UserId = car.UserId,
             };
             dbContext.Cars.Add(newCar);
@@ -138,7 +148,7 @@ namespace Triperis.Controllers
         public async Task<IActionResult> UpdateCar([FromRoute] int id, [FromBody] CarCreateDto car)
         {
             var existingCar = await dbContext.Cars.FirstOrDefaultAsync(x => x.Id == id);
-            if(existingCar != null)
+            if (existingCar != null)
             {
                 existingCar.Marke = car.Marke;
                 existingCar.Modelis = car.Modelis;
@@ -169,11 +179,26 @@ namespace Triperis.Controllers
         public async Task<IActionResult> DeleteCar([FromRoute] int id)
         {
             var existingCar = await dbContext.Cars.FirstOrDefaultAsync(x => x.Id == id);
-            if(existingCar != null)
+            if (existingCar != null)
             {
                 dbContext.Cars.Remove(existingCar);
                 await dbContext.SaveChangesAsync();
                 return Ok(existingCar);
+            }
+            return NotFound("Car not found");
+        }
+
+        [HttpPut]
+        [Route("ChangeTag")]
+        public async Task<IActionResult> ChangeTag([FromBody] int id)
+        {
+            var existingCar = await dbContext.Cars.FirstOrDefaultAsync(x => x.Id == id);
+            if(existingCar != null)
+            {
+                existingCar.Parduotas = !existingCar.Parduotas;
+                existingCar.AtnaujintasData = DateTime.Now;
+                await dbContext.SaveChangesAsync();
+                return Ok (existingCar);
             }
             return NotFound("Car not found");
         }

@@ -24,4 +24,12 @@ export class CarsService {
   postCar(car: CarCreateEdit) : Observable<Car>{
     return this.http.post<Car>(this.baseUrl, car);
   }
+
+  changeStatus(id: number) : Observable<Car>{
+    return this.http.put<Car>(this.baseUrl + '/ChangeTag', id);
+  }
+
+  putCar(car: CarCreateEdit, id: number) : Observable<Car>{
+    return this.http.put<Car>(this.baseUrl + `/${id}`, car);
+  }
 }

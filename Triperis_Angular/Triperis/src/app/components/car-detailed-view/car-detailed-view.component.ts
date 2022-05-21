@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/services/toast.service';
 import { CommentsService } from './../../services/comments.service';
 import { UserDetails } from './../../models/userDetails.model';
 import { UsersService } from 'src/app/services/users.service';
@@ -41,6 +42,7 @@ export class CarDetailedViewComponent implements OnInit {
     private imageService : ImagesService,
     private userService: UsersService,
     private commentService : CommentsService,
+    private toastService : ToastService
     ) { }
 
   ngOnInit(): void {
@@ -124,7 +126,21 @@ export class CarDetailedViewComponent implements OnInit {
     this.comment = '';
     this.commentService.postComment(newComment).subscribe(event => {
       this.getComments2();
+      this.toastService.open('Komentaras sukurtas');
     });
+  }
+
+  changeTag(){
+    this.carsService.changeStatus(this.car.id).subscribe(event => {
+      this.carsService.getCar(this.car.id).subscribe(car => {
+        this.car = car;
+      });
+      this.toastService.open('Būsena buvo pakeista');
+    });
+  }
+
+  openEdit(){
+    
   }
 
 }

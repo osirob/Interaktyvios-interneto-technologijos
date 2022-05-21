@@ -64,6 +64,12 @@
     color: #536DFE;
 }
 
+.sold{
+    font-weight: bold;
+    font-size: x-large;
+    color: #E74C3C;
+}
+
 .description{
     margin-top: 15px;
 }
@@ -97,3 +103,7 @@
 .spacer{
     margin-top: 100px;
 }
+
+.red {
+    background: #b71c1c;
+  }

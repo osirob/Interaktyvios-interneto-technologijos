@@ -40,7 +40,7 @@ import { CarFormComponent } from './components/car-form/car-form.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CarAddComponent } from './components/car-add/car-add.component';
-
+import { MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -90,7 +90,8 @@ import { CarAddComponent } from './components/car-add/car-add.component';
     MatDividerModule,
     IvyCarouselModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatTooltipModule
   ],
   providers: [UsersService,{
     provide: HTTP_INTERCEPTORS,

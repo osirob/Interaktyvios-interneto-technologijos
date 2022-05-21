@@ -1,6 +1,11 @@
 <div *ngIf="ready === 3">
     <div class="offset">
-        <h1>{{car.marke}} {{car.modelis}} {{car.kebuloTipas}} {{car.metai}} m</h1>
+        <mat-icon
+            *ngIf="car.ispejimas" 
+            style="float: right;"
+            matTooltip="Automobilis galimai gali turėti defektų"
+            matTooltipClass="red"
+        >warning</mat-icon> <h1>{{car.marke}} {{car.modelis}} {{car.kebuloTipas}} {{car.metai}} m</h1>
         <p class="gray">Atnaujinta {{dateUpdated}}</p>
     </div>
     
@@ -99,8 +104,11 @@
             <div class="attrName">
                 <p>Kaina</p>
             </div>
-            <div class="price">
+            <div class="price" *ngIf="!car.parduotas">
                 <p>{{car.kaina}} €</p>
+            </div>
+            <div class="sold" *ngIf="car.parduotas">
+                <p>PARDUOTA</p>
             </div>
         </div>
         <mat-divider></mat-divider>
@@ -109,6 +117,10 @@
                 <textarea matInput readonly [ngModel]="car.aprasymas" rows="15" style="resize: none;"></textarea>
             </mat-form-field>  
         </div>
+        <span *ngIf="car.userId == user.id">
+            <button style="margin-right: 5px; margin-bottom: 5px;" mat-flat-button color="warn" (click)="openEdit()">Redaguoti</button>
+            <button mat-flat-button color="warn" (click)="changeTag()">Žymėti kaip parduotą</button>
+        </span>
     </div>
     
     <div class="pictures">
