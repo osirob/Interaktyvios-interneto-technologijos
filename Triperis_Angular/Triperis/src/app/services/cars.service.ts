@@ -1,3 +1,4 @@
+import { CarCreateEdit } from './../models/carCreate.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -18,5 +19,9 @@ export class CarsService {
 
   getCar(id: number) : Observable<Car>{
     return this.http.get<Car>(this.baseUrl + `/${id}`);
+  }
+
+  postCar(car: CarCreateEdit) : Observable<Car>{
+    return this.http.post<Car>(this.baseUrl, car);
   }
 }

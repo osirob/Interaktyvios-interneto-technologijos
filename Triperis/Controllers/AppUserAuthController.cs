@@ -26,7 +26,8 @@ namespace Triperis.Controllers
             return Ok( new {
                 UserName = user.UserName,
                 Email = user.Email,
-                Phone = user.PhoneNumber
+                Phone = user.PhoneNumber,
+                Id = user.Id
             });
         }
 

@@ -1,8 +1,8 @@
+import { ImageUploadComponent } from './../images/image-upload/image-upload.component';
 import { BrandsService } from './../../services/brands.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Car } from 'src/app/models/car.model';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-car-form',
@@ -13,6 +13,9 @@ export class CarFormComponent implements OnInit {
 
   @Input() title: string;
   public form: FormGroup;
+  
+  @ViewChild(ImageUploadComponent)
+  public picUpload: ImageUploadComponent;
 
   public carsInfo : any;
   public models : any;
@@ -55,7 +58,8 @@ export class CarFormComponent implements OnInit {
       rida: ['', [Validators.required]],
       vin: ['', [Validators.required]],
       defektai: ['', [Validators.required]],
-      kaina: ['', [Validators.required]]
+      kaina: ['', [Validators.required]],
+      aprasymas: ['', [Validators.required]]
     }) as FormGroup;
   }
 
@@ -72,9 +76,5 @@ export class CarFormComponent implements OnInit {
         return i.models;
       }
     }
-  }
-
-  log(){
-    console.log(this.form.controls.defektai.value);
   }
 }

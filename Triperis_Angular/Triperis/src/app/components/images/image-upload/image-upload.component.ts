@@ -19,7 +19,7 @@ export class ImageUploadComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onUpload() {
+  onUpload(carId : number) {
     if(this.files.length === 0){
       this.toastService.open('Pasirinkite bent vieną nuotrauką.');
       return;
@@ -41,10 +41,10 @@ export class ImageUploadComponent implements OnInit {
       formData.append('files', file);
     }
     
-    console.log(formData.getAll('files'));
+    //console.log(formData.getAll('files'));
 
     //formData.append('file', filesToUpload);
-    this.imagesService.uploadImage(formData, 1).subscribe( response =>{
+    this.imagesService.uploadImage(formData, carId).subscribe( response =>{
       if(response.type === HttpEventType.Response){
         console.log('Images Uploaded');
       }
@@ -53,6 +53,15 @@ export class ImageUploadComponent implements OnInit {
 
   onChange(event){
     this.files = event.target.files;
+  }
+
+  picStatus(): boolean{
+    if(this.files.length <= 4 && this.files.length != 0){
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 }

@@ -39,6 +39,7 @@ import { CarCommentComponent } from './components/car-comment/car-comment.compon
 import { CarFormComponent } from './components/car-form/car-form.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { CarAddComponent } from './components/car-add/car-add.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     CarDetailedViewComponent,
     ImageCarouselComponent,
     CarCommentComponent,
-    CarFormComponent
+    CarFormComponent,
+    CarAddComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
       {path: 'UserList', component: UserListComponent, pathMatch: 'full', canActivate:[AuthGuard], data : {permittedRoles: ['Admin']}},
       {path: 'UploadImages', component: ImageUploadComponent, pathMatch: 'full'},
       {path: 'Cars/:id', component: CarDetailedViewComponent},
-      {path: 'Form', component: CarFormComponent}
+      {path: 'Form', component: CarFormComponent},
+      {path: 'NewListing', component: CarAddComponent}
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,

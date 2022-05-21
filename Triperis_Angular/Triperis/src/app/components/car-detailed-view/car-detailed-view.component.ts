@@ -20,9 +20,11 @@ export class CarDetailedViewComponent implements OnInit {
   images : ImageUrl[];
   seller : UserDetails;
   comments : CarComment[];
+  noComments: boolean = true;
   dateCreated : string;
   dateUpdated : string;
   ready :number = 0;
+  defects: string;
   
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +44,13 @@ export class CarDetailedViewComponent implements OnInit {
       this.car = event;
       this.dateUpdated = formatDate(this.car.atnaujintasData, 'yyy-MM-dd HH:mm', 'en-US');
       this.dateCreated = formatDate(this.car.sukurimoData, 'yyy-MM-dd HH:mm', 'en-US');
+
+      if(this.car.defektai === true){
+        this.defects = 'Taip';
+      }
+      else{
+        this.defects ='Ne';
+      }
       //this.car.aprasymas = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
 
       this.getImages();
@@ -65,10 +74,16 @@ export class CarDetailedViewComponent implements OnInit {
   }
 
   getComments(): void{
-    this.commentService.getCommentsById(this.car.id).subscribe(event => {
-      this.comments = event;
-      this.ready++
-    });
+    this.commentService.getCommentsById(this.car.id).subscribe(
+      event => {
+        this.comments = event;
+        this.noComments = false;
+        this.ready++;
+      },
+      error => {
+        this.ready++;
+      }
+      );
   }
 
 }

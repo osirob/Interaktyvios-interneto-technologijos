@@ -86,7 +86,7 @@
                 <p>Defektai</p>
             </div>
             <div class="attrValue">
-                <p>{{car.defektai}}</p>
+                <p>{{defects}}</p>
             </div>
     
             <div class="attrName">
@@ -115,9 +115,13 @@
         <app-image-carousel [images]="images" ></app-image-carousel>
     </div>
     
-    <div class="comments">
+    <div class="comments" >
         <h2>Komentarai</h2>
         <mat-divider></mat-divider>
+        <div class="noComments" *ngIf="noComments">
+            <p>Komentarų nėra.</p>
+        </div>
+
         <ng-container *ngFor="let comment of comments">
             <app-car-comment [comment]="comment"></app-car-comment>
         </ng-container>
