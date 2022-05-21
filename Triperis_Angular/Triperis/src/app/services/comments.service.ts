@@ -1,3 +1,4 @@
+import { AddComment } from './../models/commentCreate.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -13,5 +14,9 @@ export class CommentsService {
 
   getCommentsById(carId : number) : Observable<CarComment[]>{
     return this.http.get<CarComment[]>(this.baseUrl + `/${carId}`);
+  }
+
+  postComment(comment: AddComment): Observable<AddComment>{
+    return this.http.post<AddComment>(this.baseUrl, comment);
   }
 }

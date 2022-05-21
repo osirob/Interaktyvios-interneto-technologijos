@@ -9,6 +9,7 @@ import { ImagesService } from 'src/app/services/images.service';
 import { ImageUrl } from 'src/app/models/imageUrl';
 import { formatDate } from '@angular/common';
 import { CarComment } from 'src/app/models/comment.model';
+import { AddComment } from 'src/app/models/commentCreate.model';
 
 @Component({
   selector: 'app-car-detailed-view',
@@ -20,22 +21,31 @@ export class CarDetailedViewComponent implements OnInit {
   images : ImageUrl[];
   seller : UserDetails;
   comments : CarComment[];
-  noComments: boolean = true;
+  noComments : boolean = true;
   dateCreated : string;
   dateUpdated : string;
-  ready :number = 0;
-  defects: string;
+  ready : number = 0;
+  defects : string;
+
+  //USER STUFF
+  loggedIn: boolean;
+  role: string;
+  user: UserDetails;
+
+  //Comment
+  comment: string = '';
   
   constructor(
     private route: ActivatedRoute,
     private carsService: CarsService,
     private imageService : ImagesService,
     private userService: UsersService,
-    private commentService : CommentsService
+    private commentService : CommentsService,
     ) { }
 
   ngOnInit(): void {
     this.getCar();
+    this.getUserInfo();
   }
 
   getCar(): void{
@@ -84,6 +94,37 @@ export class CarDetailedViewComponent implements OnInit {
         this.ready++;
       }
       );
+  }
+
+  getComments2(){
+    this.commentService.getCommentsById(this.car.id).subscribe(
+      event => {
+        this.comments = event;
+        this.noComments = false;
+      });
+  }
+
+  getUserInfo(){
+    this.loggedIn = this.userService.ifLoggedIn();
+    this.role = this.userService.getRole();
+    if(this.loggedIn){
+      this.userService.getUserProfile().subscribe(user => {
+        this.user = user;
+      });
+    }
+  }
+
+  postComment(){
+    var newComment : AddComment = {
+      text: this.comment,
+      userName: this.user.userName,
+      carId: this.car.id
+    };
+
+    this.comment = '';
+    this.commentService.postComment(newComment).subscribe(event => {
+      this.getComments2();
+    });
   }
 
 }

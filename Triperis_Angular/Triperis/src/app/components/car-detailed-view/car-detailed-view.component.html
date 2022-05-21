@@ -118,6 +118,12 @@
     <div class="comments" >
         <h2>Komentarai</h2>
         <mat-divider></mat-divider>
+        <div *ngIf="loggedIn && role == 'User' " class="commentInput">
+            <mat-form-field appearance="fill" class="textBox">
+                <textarea matInput [(ngModel)]="comment" rows="3" style="resize: none;" placeholder="Rašykite komentarą"></textarea>
+            </mat-form-field>
+            <p align="right"><button mat-flat-button (click)="postComment()" [disabled]="comment.length == 0" color="primary">Paskelbti</button></p>
+        </div>
         <div class="noComments" *ngIf="noComments">
             <p>Komentarų nėra.</p>
         </div>
@@ -125,5 +131,6 @@
         <ng-container *ngFor="let comment of comments">
             <app-car-comment [comment]="comment"></app-car-comment>
         </ng-container>
+        <div class="spacer"></div>
     </div>
 </div>

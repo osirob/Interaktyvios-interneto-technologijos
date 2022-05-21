@@ -59,4 +59,23 @@ export class UsersService {
     });
     return isMatch;
   }
+
+  getRole(): string {
+    if(localStorage.getItem('token') != null){
+      var payload = JSON.parse(window.atob(localStorage.getItem('token')!.split('.')[1]));
+      return payload.role;
+    }
+    else{
+      return 'None';
+    }
+  }
+
+  ifLoggedIn(){
+    if(localStorage.getItem('token') != null){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }

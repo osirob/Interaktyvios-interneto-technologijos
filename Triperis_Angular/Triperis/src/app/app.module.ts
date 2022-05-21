@@ -75,10 +75,8 @@ import { CarAddComponent } from './components/car-add/car-add.component';
       {path: 'LoginRegister', component: UserTabsComponent, pathMatch: 'full'},
       {path: 'Forbidden', component: ForbiddenComponent, pathMatch: 'full'},
       {path: 'UserList', component: UserListComponent, pathMatch: 'full', canActivate:[AuthGuard], data : {permittedRoles: ['Admin']}},
-      {path: 'UploadImages', component: ImageUploadComponent, pathMatch: 'full'},
       {path: 'Cars/:id', component: CarDetailedViewComponent},
-      {path: 'Form', component: CarFormComponent},
-      {path: 'NewListing', component: CarAddComponent}
+      {path: 'NewListing', component: CarAddComponent, canActivate:[AuthGuard], data : {permittedRoles: ['User']}}
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,

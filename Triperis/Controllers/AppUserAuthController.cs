@@ -27,7 +27,9 @@ namespace Triperis.Controllers
                 UserName = user.UserName,
                 Email = user.Email,
                 Phone = user.PhoneNumber,
-                Id = user.Id
+                Id = user.Id,
+                CanCreateListings = user.CanCreateListings,
+                CanComment = user.CanComment
             });
         }
 
