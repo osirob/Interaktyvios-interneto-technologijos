@@ -130,7 +130,7 @@
     <div class="comments" >
         <h2>Komentarai</h2>
         <mat-divider></mat-divider>
-        <div *ngIf="loggedIn && role == 'User' " class="commentInput">
+        <div *ngIf="loggedIn && role == 'User' && user.canComment " class="commentInput">
             <mat-form-field appearance="fill" class="textBox">
                 <textarea matInput [(ngModel)]="comment" rows="3" style="resize: none;" placeholder="Rašykite komentarą"></textarea>
             </mat-form-field>

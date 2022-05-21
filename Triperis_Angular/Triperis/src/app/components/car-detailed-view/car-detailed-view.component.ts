@@ -4,7 +4,7 @@ import { UserDetails } from './../../models/userDetails.model';
 import { UsersService } from 'src/app/services/users.service';
 import { CarsService } from 'src/app/services/cars.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/models/car.model';
 import { ImagesService } from 'src/app/services/images.service';
 import { ImageUrl } from 'src/app/models/imageUrl';
@@ -42,7 +42,8 @@ export class CarDetailedViewComponent implements OnInit {
     private imageService : ImagesService,
     private userService: UsersService,
     private commentService : CommentsService,
-    private toastService : ToastService
+    private toastService : ToastService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -140,7 +141,7 @@ export class CarDetailedViewComponent implements OnInit {
   }
 
   openEdit(){
-    
+    //router navigate to edit
   }
 
 }
