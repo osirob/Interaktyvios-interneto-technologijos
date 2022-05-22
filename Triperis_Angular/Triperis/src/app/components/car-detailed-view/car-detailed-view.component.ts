@@ -141,7 +141,7 @@ export class CarDetailedViewComponent implements OnInit {
   }
 
   openEdit(){
-    //router navigate to edit
+    this.router.navigate(['Cars/Edit', `${this.car.id}`]);
   }
 
 }

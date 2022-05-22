@@ -22,4 +22,8 @@ export class ImagesService {
   getCarImages(id: number) : Observable<ImageUrl[]>{
     return this.http.get<ImageUrl[]>(this.baseUrl + '/GetCarImages' + `/${id}`);
   } 
+
+  editImage(formdata : FormData, carId : number) : Observable<any>{
+    return this.http.put(this.baseUrl + '/Edit' + `/${carId}`, formdata, {reportProgress: true, observe: 'events'});
+  }
 }

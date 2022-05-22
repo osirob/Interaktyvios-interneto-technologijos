@@ -105,7 +105,7 @@ namespace Triperis.Controllers
         public async Task<IActionResult> AddCar([FromBody] CarCreateDto car)
         {
             bool warning = false;
-            var dupicate = await dbContext.Cars.Where(c => c.Vin == car.Vin).FirstOrDefaultAsync();
+            var dupicate = await dbContext.Cars.Where(c => c.Vin == car.Vin).OrderByDescending(c => c.AtnaujintasData).FirstOrDefaultAsync();
             if (dupicate != null)
             {
                 if((DateTime.Now - dupicate.AtnaujintasData).TotalDays < 14)

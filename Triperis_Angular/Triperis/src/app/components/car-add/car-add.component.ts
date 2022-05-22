@@ -48,10 +48,10 @@ export class CarAddComponent implements OnInit {
         userId: this.userDetails.id,
         parduotas: false
       };
-      console.log(newCar);
+      //console.log(newCar);
       this.carsService.postCar(newCar).subscribe(success => {
         this.carForm.picUpload.onUpload(success.id);
-        console.log('CONGRAULATIONS');
+        //console.log('CONGRAULATIONS');
       });
     }
     else{
