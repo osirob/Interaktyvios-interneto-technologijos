@@ -14,6 +14,10 @@
             <a *ngIf="role === 'User' && user.canCreateListings == true" mat-flat-button color="primary" [routerLink]="'/NewListing'">Sukurti skelbimą</a>
         </ng-container>
 
+        <ng-container *ngIf="loggedIn">
+            <a *ngIf="role === 'Admin'" mat-flat-button color="primary" [routerLink]="'/UserList'">Naudotojai</a>
+        </ng-container>
+
         <ng-container *ngIf="!loggedIn">
             <a mat-flat-button color="primary" [routerLink]="'/LoginRegister'">Prisijungti</a>
         </ng-container>

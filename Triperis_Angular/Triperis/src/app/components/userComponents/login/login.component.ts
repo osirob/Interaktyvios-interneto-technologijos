@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       (response) => {
         localStorage.setItem('token', response.token);
         this.usersService.setLogin();
-        this.router.navigateByUrl('/Profile'); //navigates to car listings
+        this.router.navigateByUrl('/'); //navigates to car listings
       },
       
       //failure

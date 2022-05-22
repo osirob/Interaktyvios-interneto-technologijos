@@ -117,11 +117,13 @@
                 <textarea matInput readonly [ngModel]="car.aprasymas" rows="15" style="resize: none;"></textarea>
             </mat-form-field>  
         </div>
-        <span *ngIf="car.userId == user.id">
-            <button style="margin-right: 5px; margin-bottom: 5px;" mat-flat-button color="primary" (click)="openEdit()">Redaguoti</button>
-            <button style="margin-bottom: 5px; margin-right: 5px;" mat-flat-button color="primary" (click)="changeTag()">Žymėti kaip parduotą</button>
-        </span>
-        <button *ngIf="car.userId == user.id || role == 'Admin'" (click)="delete()" mat-flat-button color="warn">Trinti</button>
+        <div *ngIf="loggedIn">
+            <span *ngIf="car.userId == user.id">
+                <button style="margin-right: 5px; margin-bottom: 5px;" mat-flat-button color="primary" (click)="openEdit()">Redaguoti</button>
+                <button style="margin-bottom: 5px; margin-right: 5px;" mat-flat-button color="primary" (click)="changeTag()">Žymėti kaip parduotą</button>
+            </span>
+            <button *ngIf="car.userId == user.id || role == 'Admin'" (click)="delete()" mat-flat-button color="warn">Trinti</button>
+        </div>
     </div>
     
     <div class="pictures">
