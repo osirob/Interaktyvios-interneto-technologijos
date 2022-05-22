@@ -118,9 +118,10 @@
             </mat-form-field>  
         </div>
         <span *ngIf="car.userId == user.id">
-            <button style="margin-right: 5px; margin-bottom: 5px;" mat-flat-button color="warn" (click)="openEdit()">Redaguoti</button>
-            <button mat-flat-button color="warn" (click)="changeTag()">Žymėti kaip parduotą</button>
+            <button style="margin-right: 5px; margin-bottom: 5px;" mat-flat-button color="primary" (click)="openEdit()">Redaguoti</button>
+            <button style="margin-bottom: 5px; margin-right: 5px;" mat-flat-button color="primary" (click)="changeTag()">Žymėti kaip parduotą</button>
         </span>
+        <button *ngIf="car.userId == user.id || role == 'Admin'" (click)="delete()" mat-flat-button color="warn">Trinti</button>
     </div>
     
     <div class="pictures">

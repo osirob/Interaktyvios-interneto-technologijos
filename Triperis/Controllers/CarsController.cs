@@ -24,8 +24,98 @@ namespace Triperis.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllCars()
         {
-            var cars = await dbContext.Cars.ToListAsync();
+            var cars = await dbContext.Cars.Where(c => c.Parduotas == false).ToListAsync();
             var carDtos = new List<CarDto>();
+
+            foreach (var car in cars)
+            {
+                AppUser user = await _userManager.FindByIdAsync(car.UserId.ToString());
+
+                var carDto = new CarDto()
+                {
+                    Id = car.Id,
+                    Marke = car.Marke,
+                    Modelis = car.Modelis,
+                    Metai = car.Metai,
+                    KuroTipas = car.KuroTipas,
+                    KebuloTipas = car.KebuloTipas,
+                    VariklioTuris = car.VariklioTuris,
+                    Galia = car.Galia,
+                    Rida = car.Rida,
+                    Defektai = car.Defektai,
+                    Spalva = car.Spalva,
+                    PavaruDeze = car.PavaruDeze,
+                    Aprasymas = car.Aprasymas,
+                    SukurimoData = car.SukurimoData,
+                    AtnaujintasData = car.AtnaujintasData,
+                    Parduotas = car.Parduotas,
+                    Kaina = car.Kaina,
+                    Vin = car.Vin,
+                    Ispejimas = car.Ispejimas,
+                    UserId = car.UserId
+                };
+                carDtos.Add(carDto);
+            }
+            return Ok(carDtos);
+        }
+
+        [HttpGet]
+        [Route("UserCars/{id}")]
+        public async Task<IActionResult> GetAllCarsUser([FromRoute] int id)
+        {
+            //EDIT HERE
+            var cars = await dbContext.Cars.Where(c => c.UserId == id).Where(c => c.Parduotas == false).ToListAsync();
+            var carDtos = new List<CarDto>();
+
+            if(cars == null)
+            {
+                return NotFound("User has no available cars");
+            }
+
+            foreach (var car in cars)
+            {
+                AppUser user = await _userManager.FindByIdAsync(car.UserId.ToString());
+
+                var carDto = new CarDto()
+                {
+                    Id = car.Id,
+                    Marke = car.Marke,
+                    Modelis = car.Modelis,
+                    Metai = car.Metai,
+                    KuroTipas = car.KuroTipas,
+                    KebuloTipas = car.KebuloTipas,
+                    VariklioTuris = car.VariklioTuris,
+                    Galia = car.Galia,
+                    Rida = car.Rida,
+                    Defektai = car.Defektai,
+                    Spalva = car.Spalva,
+                    PavaruDeze = car.PavaruDeze,
+                    Aprasymas = car.Aprasymas,
+                    SukurimoData = car.SukurimoData,
+                    AtnaujintasData = car.AtnaujintasData,
+                    Parduotas = car.Parduotas,
+                    Kaina = car.Kaina,
+                    Vin = car.Vin,
+                    Ispejimas = car.Ispejimas,
+                    UserId = car.UserId
+                };
+                carDtos.Add(carDto);
+            }
+            return Ok(carDtos);
+        }
+
+        [HttpGet]
+        [Route("UserCarsSold/{id}")]
+        public async Task<IActionResult> GetAllCarsUserSold([FromRoute] int id)
+        {
+            //EDIT HERE
+            var cars = await dbContext.Cars.Where(c => c.UserId == id).Where(c => c.Parduotas == true).ToListAsync();
+            var carDtos = new List<CarDto>();
+
+            if (cars == null)
+            {
+                return NotFound("User has no sold cars");
+            }
 
             foreach (var car in cars)
             {

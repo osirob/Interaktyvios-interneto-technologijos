@@ -42,6 +42,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { MatTooltipModule} from '@angular/material/tooltip';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
+import { UserCarsComponent } from './components/userComponents/user-cars/user-cars.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { CarEditComponent } from './components/car-edit/car-edit.component';
     CarCommentComponent,
     CarFormComponent,
     CarAddComponent,
-    CarEditComponent
+    CarEditComponent,
+    UserCarsComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,8 @@ import { CarEditComponent } from './components/car-edit/car-edit.component';
       {path: 'UserList', component: UserListComponent, pathMatch: 'full', canActivate:[AuthGuard], data : {permittedRoles: ['Admin']}},
       {path: 'Cars/:id', component: CarDetailedViewComponent},
       {path: 'NewListing', component: CarAddComponent, canActivate:[AuthGuard], data : {permittedRoles: ['User']}},
-      {path: 'Cars/Edit/:id', component: CarEditComponent, canActivate:[AuthGuard], data : {permittedRoles: ['User']}}
+      {path: 'Cars/Edit/:id', component: CarEditComponent, canActivate:[AuthGuard], data : {permittedRoles: ['User']}},
+      {path: 'UserCars', component: UserCarsComponent, canActivate:[AuthGuard], data : {permittedRoles: ['User']}}
     ]),
     MatProgressSpinnerModule,
     MatFormFieldModule,

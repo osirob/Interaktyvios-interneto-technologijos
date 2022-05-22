@@ -32,4 +32,16 @@ export class CarsService {
   putCar(car: CarCreateEdit, id: number) : Observable<Car>{
     return this.http.put<Car>(this.baseUrl + `/${id}`, car);
   }
+
+  getCarsByUserId(userId: number): Observable<Car[]>{
+    return this.http.get<Car[]>(this.baseUrl + '/UserCars' + `/${userId}`);
+  }
+
+  getSoldCarsByUserId(userId: number): Observable<Car[]>{
+    return this.http.get<Car[]>(this.baseUrl + '/UserCarsSold' + `/${userId}`);
+  }
+
+  deleteCar(carId: number) : Observable<Car>{
+    return this.http.delete<Car>(this.baseUrl + `/${carId}`);
+  }
 }

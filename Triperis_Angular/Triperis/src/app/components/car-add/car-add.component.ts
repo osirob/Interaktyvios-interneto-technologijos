@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CarCreateEdit } from './../../models/carCreate.model';
 import { CarsService } from 'src/app/services/cars.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -21,7 +22,8 @@ export class CarAddComponent implements OnInit {
   constructor(
     private toastService: ToastService,
     private usersService : UsersService,
-    private carsService: CarsService
+    private carsService: CarsService,
+    private router : Router
     ) { }
 
   ngOnInit(): void {
@@ -51,6 +53,8 @@ export class CarAddComponent implements OnInit {
       //console.log(newCar);
       this.carsService.postCar(newCar).subscribe(success => {
         this.carForm.picUpload.onUpload(success.id);
+        this.toastService.open('Skelbimas sukurtas');
+        this.router.navigate(['Cars', `${success.id}`]);
         //console.log('CONGRAULATIONS');
       });
     }

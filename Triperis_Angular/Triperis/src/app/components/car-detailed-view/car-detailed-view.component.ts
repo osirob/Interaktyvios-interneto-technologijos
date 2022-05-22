@@ -144,4 +144,11 @@ export class CarDetailedViewComponent implements OnInit {
     this.router.navigate(['Cars/Edit', `${this.car.id}`]);
   }
 
+  delete(){
+    this.carsService.deleteCar(this.car.id).subscribe(res => {
+      this.toastService.open('Skelbimas buvo ištrintas');
+      this.router.navigate(['UserCars']);
+    });
+  }
+
 }
