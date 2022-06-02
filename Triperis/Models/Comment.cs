@@ -9,7 +9,7 @@ namespace Triperis.Models
         public string Text { get; set; }
         public DateTime CreationDate { get; set; }
 
-        //Im wayy too stupid to make EF core work properly with comments that connect to cars and comments
+        //Im wayy too stupid to make EF core work properly with comments that connect to cars and users
         public string Username { get; set; }
 
         [Required]

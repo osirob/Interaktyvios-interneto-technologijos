@@ -27,7 +27,7 @@ export class BrandsService {
 
   private years : number[] = [];
   private colors : string[] = ['Balta', 'Juoda', 'Ruda', 'Pilka', 'Geltona', 'Oranžinė', 'Raudona', 'Violetinė', 'Rausva', 'Mėlyna', 'Žalia', 'Žydra'];
-  private bodies : string[] = ['Sedanas', 'Hečbekas', 'Universalas', 'Visureigis', 'Kabrioletas', 'Limuzinas', 'Pikapas', 'Kupė'];
+  private bodies : string[] = ['Sedanas', 'Hečbekas', 'Universalas', 'Visureigis', 'Kabrioletas', 'Limuzinas', 'Pikapas', 'Kupė', 'Komercinis'];
   private fuel : string[] = ['Dyzelinas', 'Benzinas', 'Benzinas / Dujos', 'Benzinas / Elektra', 'Elektra'];
   private gearbox : string[] = ['Automatinė', 'Mechaninė'];
 
